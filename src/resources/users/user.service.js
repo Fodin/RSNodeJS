@@ -1,5 +1,5 @@
-import usersRepo from './user.memory.repository.js';
+import * as usersRepo from './user.memory.repository.js';
 
 const getAll = () => usersRepo.getAll();
 
-export default getAll;
+export { getAll };
