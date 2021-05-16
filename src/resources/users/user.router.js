@@ -9,22 +9,36 @@ router.route('/').get(async (req, res) => {
   res.json(users.map(User.toResponse));
 });
 
-router.route('/').post(async(req, res) => {
-  // console.log("Create: ", req.body);
+router.route('/').post(async (req, res) => {
   const user = await usersService.create(req.body);
-  // console.log("Create: ", user);
   res.status(201).json(User.toResponse(user));
-})
+});
 
-router.route('/:id').get(async(req, res) => {
-  // console.log("To find:", req.params.id);
+router.route('/:id').get(async (req, res) => {
   const user = await usersService.getById(req.params.id);
-  console.log(req.params.id, user);
-  if(user) {
+  if (user) {
     res.status(200).json(User.toResponse(user));
   } else {
-    res.status(404).send("User not found");
+    res.status(404).send('User not found');
   }
-})
+});
+
+router.route('/:id').put(async (req, res) => {
+  const user = await usersService.update(req.params.id, req.body);
+  if (user) {
+    res.status(200).json(User.toResponse(user));
+  } else {
+    res.status(400).send('Bad request');
+  }
+});
+
+router.route('/:id').delete(async (req, res) => {
+  const user = await usersService.remove(req.params.id);
+  if (user) {
+    res.status(204).send('The user has been deleted');
+  } else {
+    res.status(201).send('Bad request');
+  }
+});
 
 export default router;
