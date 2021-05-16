@@ -1,16 +1,7 @@
-import User from './user.model.js';
+import * as db from '../../common/database.js';
 
-const users = [];
-
-const getAll = async () => users;
-const createUser = async (user) => {
-  const newUser = new User(user);
-  users.push(newUser)
-  return newUser;
-};
-const getById = async (id) => {
-  console.log(id, users);
-  return users.filter((user) => user.id === id)[0];
-};
+const getAll = async () => db.getAllUsers();
+const createUser = async (user) => db.createUser(user);
+const getById = async (id) => db.getUserById(id);
 
 export { getAll, createUser, getById };
