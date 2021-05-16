@@ -1,6 +1,9 @@
-const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
-};
+import * as db from '../../common/database.js';
 
-module.exports = { getAll };
+const getAll = async () => db.getAllUsers();
+const create = async (user) => db.createUser(user);
+const getById = async (id) => db.getUserById(id);
+const update = async (id, user) => db.updateUser(id, user);
+const remove = async (id) => db.removeUser(id);
+
+export { getAll, create, getById, update, remove };

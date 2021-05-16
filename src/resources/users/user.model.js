@@ -1,8 +1,8 @@
-const uuid = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-class User {
+export default class User {
   constructor({
-    id = uuid(),
+    id = uuidv4(),
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd'
@@ -18,5 +18,3 @@ class User {
     return { id, name, login };
   }
 }
-
-module.exports = User;
