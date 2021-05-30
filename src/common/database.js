@@ -7,16 +7,36 @@ let boards = [new Board()];
 let tasks = [new Task()];
 
 // Users
+/**
+ * Returns all user's records
+ * @returns {User[]} Return array of all users
+ */
 const getAllUsers = () => users;
 
+/**
+ * Creates new user and returns it
+ * @param user object with name, login, password of new user
+ * @returns {User} user object
+ */
 const createUser = (user) => {
   const newUser = new User(user);
   users.push(newUser);
   return newUser;
 };
 
+/**
+ * Returns user specified by Id
+ * @param id {string} - id of user
+ * @returns {User} user object
+ */
 const getUserById = (id) => users.filter((user) => user.id === id)[0];
 
+/**
+ * Updates user data
+ * @param id {string} - id of user
+ * @param userData - new user data
+ * @returns {User|undefined} returns updated User or undefined if not found
+ */
 const updateUser = (id, userData) => {
   if (!users.some((user) => user.id === id)) {
     return undefined;
@@ -26,6 +46,11 @@ const updateUser = (id, userData) => {
   return { id, ...userData };
 };
 
+/**
+ * Removes user by Id
+ * @param id {string} - id of user
+ * @returns {boolean} - returns True if success and False if Id was not found
+ */
 const removeUser = (id) => {
   if (!users.some((user) => user.id === id)) {
     return false;
