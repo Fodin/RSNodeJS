@@ -1,5 +1,5 @@
-import * as boardsRepo from './board.memory.repository';
-import Board from './board.model';
+import * as boardsRepo from './board.memory.repository.js';
+import Board from './board.model.js';
 
 const getAll = (): Promise<Board[]> => boardsRepo.getAll();
 

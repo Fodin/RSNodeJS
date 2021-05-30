@@ -1,15 +1,16 @@
-import { Router } from 'express';
+import Express, { Router } from 'express';
 import * as tasksService from './task.service.js';
 
 const router = Router({ mergeParams: true });
 
-router.route('/').get(async (req, res) => {
+router.route('/').get(async (_req, res) => {
   const tasks = await tasksService.getAll();
   res.json(tasks);
 });
 
-router.route('/').post(async (req, res) => {
-  const task = await tasksService.create({...req.body, boardId: req.params.boardId});
+router.route('/').post(async (req: Express.Request, res) => {
+  const { boardId } = req.params;
+  const task = await tasksService.create({ ...req.body, boardId} );
   res.status(201).json(task);
 });
 

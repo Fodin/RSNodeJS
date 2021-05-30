@@ -2,31 +2,35 @@ import User from '../resources/users/user.model.js';
 import Board from '../resources/boards/board.model.js';
 import Task from '../resources/tasks/task.model.js';
 
-let users = [];
+let users: User[] = [];
 let boards = [new Board()];
 let tasks = [new Task()];
 
 // Users
-const getAllUsers = () => users;
+const getAllUsers = (): User[] => users;
 
-const createUser = (user) => {
+const createUser = (user: User): User => {
   const newUser = new User(user);
   users.push(newUser);
   return newUser;
 };
 
-const getUserById = (id) => users.filter((user) => user.id === id)[0];
+const getUserById = (id: string): User|null => {
 
-const updateUser = (id, userData) => {
+  const u = users.filter((user) => user.id === id)[0];
+  return u || null;
+}
+
+const updateUser = (id: string, userData: User): User|null => {
   if (!users.some((user) => user.id === id)) {
-    return undefined;
+    return null;
   }
   users = users.filter((user) => user.id !== id);
-  users.push({ id, ...userData });
-  return { id, ...userData };
+  users.push({ ...userData, id });
+  return { ...userData, id };
 };
 
-const removeUser = (id) => {
+const removeUser = (id: string): boolean => {
   if (!users.some((user) => user.id === id)) {
     return false;
   }
@@ -42,26 +46,26 @@ const removeUser = (id) => {
 };
 
 // Boards
-const getAllBoards = () => boards;
+const getAllBoards = (): Board[] => boards;
 
-const createBoard = (board) => {
+const createBoard = (board: Board): Board => {
   const newBoard = new Board(board);
   boards.push(newBoard);
   return newBoard;
 };
 
-const getBoardById = (id) => boards.filter((board) => board.id === id)[0];
+const getBoardById = (id: string): Board|undefined => boards.filter((board) => board.id === id)[0];
 
-const updateBoard = (id, boardData) => {
+const updateBoard = (id: string, boardData: Board): Board|undefined => {
   if (!boards.some((board) => board.id === id)) {
     return undefined;
   }
   boards = boards.filter((board) => board.id !== id);
-  boards.push({ id, ...boardData });
-  return { id, ...boardData };
+  boards.push({ ...boardData, id });
+  return { ...boardData, id };
 };
 
-const removeBoard = (id) => {
+const removeBoard = (id: string): boolean => {
   if (!boards.some((board) => board.id === id)) {
     return false;
   }
@@ -71,26 +75,26 @@ const removeBoard = (id) => {
 };
 
 // Tasks
-const getAllTasks = () => tasks;
+const getAllTasks = (): Task[] => tasks;
 
-const createTask = (task) => {
+const createTask = (task: Task): Task => {
   const newTask = new Task(task);
   tasks.push(newTask);
   return newTask;
 };
 
-const getTaskById = (id) => tasks.filter((task) => task.id === id)[0];
+const getTaskById = (id: string): Task|undefined => tasks.filter((task) => task.id === id)[0];
 
-const updateTask = (id, taskData) => {
+const updateTask = (id: string, taskData: Task): Task|undefined => {
   if (!tasks.some((task) => task.id === id)) {
     return undefined;
   }
   tasks = tasks.filter((task) => task.id !== id);
-  tasks.push({ id, ...taskData });
-  return { id, ...taskData };
+  tasks.push({ ...taskData, id });
+  return { ...taskData, id };
 };
 
-const removeTask = (id) => {
+const removeTask = (id: string): boolean => {
   if (!tasks.some((task) => task.id === id)) {
     return false;
   }
