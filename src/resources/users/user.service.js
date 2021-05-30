@@ -17,7 +17,7 @@ const create = (user) => usersRepo.create(user);
 /**
  * Returns user specified by Id
  * @param id {string} id of user
- * @returns {User|[]} User object or empty array if found nothing
+ * @returns {User[]} returns array of found Users
  */
 const getById = (id) => usersRepo.getById(id);
 

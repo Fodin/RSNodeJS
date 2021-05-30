@@ -17,7 +17,7 @@ const create = (board) => boardsRepo.create(board);
 /**
  * Returns board specified by Id
  * @param id {string} id of board
- * @returns {Board|[]} returns Board object or empty array if found nothing
+ * @returns {Board[]} returns array of found Boards
  */
 const getById = (id) => boardsRepo.getById(id);
 

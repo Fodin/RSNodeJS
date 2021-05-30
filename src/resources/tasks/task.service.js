@@ -17,7 +17,7 @@ const create = (task) => tasksRepo.create(task);
 /**
  * Returns Task specified by Id
  * @param id {string} id of task
- * @returns {Task|[]} returns Task or empty array if found nothing
+ * @returns {Task[]} returns array of found Tasks
  */
 const getById = (id) => tasksRepo.getById(id);
 
