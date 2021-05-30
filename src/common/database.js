@@ -121,16 +121,37 @@ const removeBoard = (id) => {
 };
 
 // Tasks
+/**
+ * Returns all tasks records
+ * @returns {Task[]} return array of Task objects
+ */
 const getAllTasks = () => tasks;
 
+/**
+ * Creates new task
+ * @param task {object} object with title, order, description, userId,
+ * boardId and columnId fields
+ * @returns {Task} - new Task object
+ */
 const createTask = (task) => {
   const newTask = new Task(task);
   tasks.push(newTask);
   return newTask;
 };
 
+/**
+ * Returns Task specified by Id
+ * @param id {string} id of task
+ * @returns {Task|[]} returns Task or empty array if found nothing
+ */
 const getTaskById = (id) => tasks.filter((task) => task.id === id)[0];
 
+/**
+ * Update task
+ * @param id {string} id of task
+ * @param taskData {object} object with new data of Task
+ * @returns {Task|undefined} returns Task or undefined if found nothing
+ */
 const updateTask = (id, taskData) => {
   if (!tasks.some((task) => task.id === id)) {
     return undefined;
@@ -140,6 +161,11 @@ const updateTask = (id, taskData) => {
   return { id, ...taskData };
 };
 
+/**
+ * Remove Task
+ * @param id {string} id of task
+ * @returns {boolean} returns True if success and False if Id was not found
+ */
 const removeTask = (id) => {
   if (!tasks.some((task) => task.id === id)) {
     return false;
