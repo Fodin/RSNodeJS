@@ -6,6 +6,7 @@ let users = [];
 let boards = [new Board()];
 let tasks = [new Task()];
 
+// Users
 const getAllUsers = () => users;
 
 const createUser = (user) => {
@@ -40,6 +41,7 @@ const removeUser = (id) => {
   return true;
 };
 
+// Boards
 const getAllBoards = () => boards;
 
 const createBoard = (board) => {
