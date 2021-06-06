@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import logger from './logger.js';
 
 class ErrorHandler extends Error {
   statusCode: number;
@@ -18,11 +19,11 @@ const handleError = (err: ErrorHandler, _req: Request, res: Response, _next: Nex
     message = `Internal server error: ${  message}`;
   }
 
-  console.log(JSON.stringify({
+  logger.error({
     status: "error",
     statusCode,
     message
-  }));
+  });
   res.status(statusCode).json({
     status: "error",
     statusCode,

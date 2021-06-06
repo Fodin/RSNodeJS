@@ -1,16 +1,33 @@
-import { Request, Response, NextFunction} from 'express';
-import { finished } from 'stream';
+import winston from 'winston';
 
-const logger = (req: Request, res: Response, next: NextFunction): void => {
-  const { method, url, query, body } = req;
-  const time = new Date();
-  next();
+const fileOptions = winston.format.combine(
+  winston.format.timestamp({ format: 'DD-MM-YYYY HH:mm:ss:ms' }),
+  winston.format.uncolorize(),
+  winston.format.json()
+);
 
-  finished(res, () => {
-    const { statusCode } = res;
+const consoleOptions = winston.format.combine(
+  winston.format.timestamp({ format: 'DD-MM-YYYY HH:mm:ss:ms' }),
+  winston.format.colorize(),
+  winston.format.prettyPrint()
+);
 
-    console.log(`[${time.toLocaleString("ru")}] ${method} ${url} ${JSON.stringify(query)} ${JSON.stringify(body)} ${statusCode}`);
-  })
-}
+const logger = winston.createLogger({
+  level: 'silly',
+  transports: [
+    new winston.transports.File({
+      filename: './logs/error.log',
+      level: 'error',
+      format: fileOptions,
+    }),
+    new winston.transports.File({
+      filename: './logs/all.log',
+      format: fileOptions,
+    }),
+    new winston.transports.Console({
+      format: consoleOptions,
+    }),
+  ],
+});
 
 export default logger;
