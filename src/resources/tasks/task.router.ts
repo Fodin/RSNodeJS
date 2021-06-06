@@ -5,15 +5,23 @@ import { ErrorHandler } from '../../common/errorHandler.js';
 
 const router = Router({ mergeParams: true });
 
-router.route('/').get(async (_req, res) => {
-  const tasks = await tasksService.getAll();
-  res.status(StatusCodes.OK).json(tasks);
+router.route('/').get(async (_req, res, next) => {
+  try {
+    const tasks = await tasksService.getAll();
+    res.status(StatusCodes.OK).json(tasks);
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.route('/').post(async (req: Express.Request, res) => {
-  const { boardId } = req.params;
-  const task = await tasksService.create({ ...req.body, boardId} );
-  res.status(StatusCodes.CREATED).json(task);
+router.route('/').post(async (req: Express.Request, res, next) => {
+  try {
+    const { boardId } = req.params;
+    const task = await tasksService.create({ ...req.body, boardId} );
+    res.status(StatusCodes.CREATED).json(task);
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.route('/:id').get(async (req, res, next) => {
