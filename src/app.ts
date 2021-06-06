@@ -7,6 +7,7 @@ import userRouter from './resources/users/user.router.js';
 import boardsRouter from './resources/boards/board.router.js';
 import tasksRouter from './resources/tasks/task.router.js';
 import logger from './common/logger.js'
+import { handleError } from './common/errorHandler.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -30,5 +31,7 @@ app.use('/', (req, res, next) => {
 app.use('/users', userRouter);
 app.use('/boards', boardsRouter);
 boardsRouter.use('/:boardId/tasks', tasksRouter);
+
+app.use(handleError);
 
 export default app;

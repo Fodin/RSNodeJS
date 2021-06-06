@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as boardsService from './board.service.js';
+import { ErrorHandler } from '../../common/errorHandler.js';
 
 const router = Router();
 
@@ -14,30 +15,30 @@ router.route('/').post(async (req, res) => {
   res.status(StatusCodes.CREATED).json(board);
 });
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:id').get(async (req, res, next) => {
   const board = await boardsService.getById(req.params.id);
   if (board) {
     res.status(StatusCodes.OK).json(board);
   } else {
-    res.status(StatusCodes.NOT_FOUND).send('Board not found');
+    next(new ErrorHandler(StatusCodes.NOT_FOUND, 'Board not found'));
   }
 });
 
-router.route('/:id').put(async (req, res) => {
+router.route('/:id').put(async (req, res, next) => {
   const board = await boardsService.update(req.params.id, req.body);
   if (board) {
     res.status(StatusCodes.OK).json(board);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).send('Bad request');
+    next(new ErrorHandler(StatusCodes.BAD_REQUEST, 'Bad request'));
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
+router.route('/:id').delete(async (req, res, next) => {
   const board = await boardsService.remove(req.params.id);
   if (board) {
     res.status(StatusCodes.NO_CONTENT).send('The board has been deleted');
   } else {
-    res.status(StatusCodes.BAD_REQUEST).send('Bad request');
+    next(new ErrorHandler(StatusCodes.BAD_REQUEST, 'Bad request'));
   }
 });
 

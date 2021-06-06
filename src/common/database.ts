@@ -16,7 +16,6 @@ const createUser = (user: User): User => {
 };
 
 const getUserById = (id: string): User|null => {
-
   const u = users.filter((user) => user.id === id)[0];
   return u || null;
 }
