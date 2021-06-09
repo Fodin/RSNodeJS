@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import logger from './logger.js';
+import { logger } from './logger';
 
 class ErrorHandler extends Error {
   statusCode: number;
@@ -11,7 +11,7 @@ class ErrorHandler extends Error {
   }
 }
 
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleError = (err: ErrorHandler, _req: Request, res: Response, _next: NextFunction): void => {
   let { statusCode, message } = err;
   if (!statusCode) {

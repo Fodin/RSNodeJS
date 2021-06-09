@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import * as boardsService from './board.service.js';
-import { ErrorHandler } from '../../common/errorHandler.js';
+import { boardsService } from './board.service';
+import { ErrorHandler } from '../../common/errorHandler';
 
 const router = Router();
 
@@ -50,4 +50,4 @@ router.route('/:id').delete(async (req, res, next) => {
   }
 });
 
-export default router;
+export { router as boardsRouter };

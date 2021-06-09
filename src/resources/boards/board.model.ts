@@ -6,7 +6,7 @@ type Column = {
   order: number;
 }
 
-export default class Board {
+export class Board {
   public id: string;
 
   public title: string;

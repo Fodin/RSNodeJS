@@ -1,5 +1,5 @@
-import * as usersRepo from './user.memory.repository.js';
-import User from './user.model.js';
+import { usersRepo } from './user.memory.repository';
+import { User } from './user.model';
 
 const getAll = (): Promise<User[]> => usersRepo.getAll();
 
@@ -11,4 +11,4 @@ const update = (id: string, user: User): Promise<User|null> => usersRepo.update(
 
 const remove = (id: string): Promise<boolean> => usersRepo.remove(id);
 
-export { getAll, create, getById, update, remove };
+export const usersService = { getAll, create, getById, update, remove };

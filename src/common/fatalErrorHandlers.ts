@@ -1,4 +1,4 @@
-import logger from './logger.js';
+import { logger } from './logger';
 
 const fatalErrorsHandle = (): void => {
   process
@@ -20,4 +20,4 @@ const fatalErrorsHandle = (): void => {
     });
 };
 
-export default fatalErrorsHandle;
+export { fatalErrorsHandle };

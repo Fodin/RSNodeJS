@@ -1,17 +1,15 @@
 import express from 'express';
-import * as swaggerUI from 'swagger-ui-express';
+import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
-import { fileURLToPath } from 'url';
-import userRouter from './resources/users/user.router.js';
-import boardsRouter from './resources/boards/board.router.js';
-import tasksRouter from './resources/tasks/task.router.js';
-import requestLogger from './common/requestLogger.js'
-import { handleError } from './common/errorHandler.js';
-import fatalErrorHandlers from './common/fatalErrorHandlers.js';
+import { usersRouter } from './resources/users/user.router';
+import { boardsRouter } from './resources/boards/board.router';
+import { tasksRouter } from './resources/tasks/task.router';
+import { requestLogger } from './common/requestLogger'
+import { handleError } from './common/errorHandler';
+import { fatalErrorsHandle } from './common/fatalErrorHandlers';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-fatalErrorHandlers();
+fatalErrorsHandle();
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -30,10 +28,10 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/users', userRouter);
+app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 boardsRouter.use('/:boardId/tasks', tasksRouter);
 
 app.use(handleError);
 
-export default app;
+export { app };

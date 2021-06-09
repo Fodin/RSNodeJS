@@ -1,5 +1,5 @@
-import * as tasksRepo from './task.memory.repository.js';
-import Task from './task.model.js';
+import { tasksRepo } from './task.memory.repository';
+import { Task } from './task.model';
 
 const getAll = (): Promise<Task[]> => tasksRepo.getAll();
 
@@ -11,4 +11,4 @@ const update = (id: string, task: Task):Promise<Task|undefined> => tasksRepo.upd
 
 const remove = (id: string): Promise<boolean> => tasksRepo.remove(id);
 
-export { getAll, create, getById, update, remove };
+export const tasksService = { getAll, create, getById, update, remove };

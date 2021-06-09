@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction} from 'express';
 import { finished } from 'stream';
-import logger from './logger.js';
+import { logger } from './logger';
 
 const requestLogger = (req: Request, res: Response, next: NextFunction): void => {
   const { method, url, query, body, params, headers } = req;
@@ -12,4 +12,4 @@ const requestLogger = (req: Request, res: Response, next: NextFunction): void =>
   })
 }
 
-export default requestLogger;
+export { requestLogger };

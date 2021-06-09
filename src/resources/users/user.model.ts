@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export default class User {
+export class User {
   public id: string|null;
 
   public name: string;

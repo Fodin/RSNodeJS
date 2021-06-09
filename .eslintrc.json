@@ -12,7 +12,8 @@
   ],
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2021,
+    "ecmaVersion": 2020,
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "impliedStrict": true
     }
@@ -40,6 +41,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
     "airbnb-base",
+    "airbnb-typescript/base",
     "prettier"
   ],
   "rules": {
@@ -47,9 +49,6 @@
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
-    "import/prefer-default-export": "off",
-    "dot-notation": "off",
-    "import/no-unresolved" : "off",
-    "node/no-missing-import" : "off"
+    "import/prefer-default-export": "off"
   }
 }

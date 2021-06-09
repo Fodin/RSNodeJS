@@ -1,7 +1,7 @@
 import Express, { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import * as tasksService from './task.service.js';
-import { ErrorHandler } from '../../common/errorHandler.js';
+import { tasksService } from './task.service';
+import { ErrorHandler } from '../../common/errorHandler';
 
 const router = Router({ mergeParams: true });
 
@@ -51,4 +51,4 @@ router.route('/:id').delete(async (req, res, next) => {
   }
 });
 
-export default router;
+export { router as tasksRouter};

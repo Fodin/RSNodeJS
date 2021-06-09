@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import User from './user.model.js';
-import * as usersService from './user.service.js';
-import { ErrorHandler } from '../../common/errorHandler.js';
+import { User } from './user.model';
+import { usersService } from './user.service';
+import { ErrorHandler } from '../../common/errorHandler';
 
 const router = Router();
 
@@ -51,4 +51,4 @@ router.route('/:id').delete(async (req, res, next) => {
   }
 });
 
-export default router;
+export { router as usersRouter };

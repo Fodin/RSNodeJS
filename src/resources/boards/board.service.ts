@@ -1,5 +1,5 @@
-import * as boardsRepo from './board.memory.repository.js';
-import Board from './board.model.js';
+import { boardsRepo } from './board.memory.repository';
+import { Board } from './board.model';
 
 const getAll = (): Promise<Board[]> => boardsRepo.getAll();
 
@@ -11,4 +11,4 @@ const update = (id: string, board: Board): Promise<Board|undefined> => boardsRep
 
 const remove = (id: string): Promise<boolean> => boardsRepo.remove(id);
 
-export { getAll, create, getById, update, remove };
+export const boardsService = { getAll, create, getById, update, remove };
