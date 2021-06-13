@@ -1,5 +1,16 @@
 # RS School REST service
 
+## Создание и запуск Docker-образов
+Все команды набираются в папке проекта
+
+Для создания образа с БД служит команда ```docker build -f DockerfilePostgres -t fodin/postgres:13.3-fixed .```
+
+Для создания образа приложения служит команда ```docker build -t fodin/rs-node-app:1.0 .```
+
+Для запуска приложения наберите команду ```docker compose up```
+
+Для запуска приложения в фоновом режиме наберите команду ```docker compose up -d ```. Для остановки фонового приложения наберите ```docker compose down```.
+
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
