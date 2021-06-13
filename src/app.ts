@@ -7,7 +7,7 @@ import { boardsRouter } from './resources/boards/board.router';
 import { tasksRouter } from './resources/tasks/task.router';
 import { requestLogger } from './common/requestLogger'
 import { handleError } from './common/errorHandler';
-import { fatalErrorsHandle } from './common/fatalErrorHandlers';
+import { fatalErrorsHandle } from './common/fatalErrorHandlers'; // Test
 
 fatalErrorsHandle();
 
@@ -32,6 +32,10 @@ app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 boardsRouter.use('/:boardId/tasks', tasksRouter);
 
-app.use(handleError);
+app.use('/error', () => {
+  Promise.reject(Error('Fatal error!'));
+});
+ 
+app.use(handleError );
 
 export { app };
