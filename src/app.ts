@@ -2,6 +2,7 @@ import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
+import 'reflect-metadata';
 import { usersRouter } from './resources/users/user.router';
 import { boardsRouter } from './resources/boards/board.router';
 import { tasksRouter } from './resources/tasks/task.router';
