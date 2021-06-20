@@ -1,12 +1,18 @@
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
+@Entity()
 export class User {
+  @PrimaryGeneratedColumn('uuid')
   public id: string|null;
 
+  @Column()
   public name: string;
 
+  @Column()
   public login: string;
 
+  @Column()
   public password?: string;
 
   constructor({
