@@ -1,29 +1,44 @@
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { User } from '../users/user.model';
 
+@Entity()
 export class Task {
-  public id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  public title: string;
+  @Column()
+  title: string;
 
-  public order: number;
+  @Column()
+  order: number;
 
-  public description: string;
+  @Column()
+  description: string;
 
-  public userId: string|null;
+  @Column({ type: 'varchar', nullable: true })
+  userId: string | null;
 
-  public boardId: string|null;
+  @Column({ type: 'varchar', nullable: true })
+  boardId: string | null;
 
-  public columnId: string|null;
+  @Column({ type: 'varchar', nullable: true })
+  columnId: string | null;
 
-  constructor({
-    id = uuidv4(),
-    title = 'New task',
-    order = 0,
-    description = 'No description',
-    userId = null,
-    boardId = null,
-    columnId = null,
-  } = {} as Task) {
+  @ManyToOne(() => User, { onDelete: 'SET NULL' })
+  user: User | undefined;
+
+  constructor(
+    {
+      id = uuidv4(),
+      title = 'New task',
+      order = 0,
+      description = 'No description',
+      userId = null,
+      boardId = null,
+      columnId = null,
+    } = {} as Task
+  ) {
     this.id = id;
     this.title = title;
     this.order = order;

@@ -19,10 +19,6 @@ const update = async (id: string, user: User): Promise<User|undefined> => {
   return updatedUser.raw;
 };
 
-const remove = async (id: string): Promise<boolean> => {
-  const result = getRepository(User).delete(id);
-  if (!result) return false;
-  return true;
-};
+const remove = async (id: string): Promise<boolean> => !!(await getRepository(User).delete(id));
 
 export const usersRepo = { getAll, create, getById, update, remove };

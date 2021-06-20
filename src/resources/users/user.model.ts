@@ -15,7 +15,7 @@ export class User {
   @Column()
   public password?: string;
 
-  constructor({
+   constructor({
     id = uuidv4(),
     name = 'USER',
     login = 'user',
