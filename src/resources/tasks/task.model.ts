@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { User } from '../users/user.model';
+import { Board} from '../boards/board.model';
 
 @Entity()
 export class Task {
@@ -27,6 +28,9 @@ export class Task {
 
   @ManyToOne(() => User, { onDelete: 'SET NULL' })
   user: User | undefined;
+
+  @ManyToOne(() => Board, { onDelete: 'CASCADE' })
+  board: Board | undefined;
 
   constructor(
     {

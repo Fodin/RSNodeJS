@@ -1,4 +1,4 @@
-import { boardsRepo } from './board.memory.repository';
+import { boardsRepo } from './board.typeorm.repository';
 import { Board } from './board.model';
 
 const getAll = (): Promise<Board[]> => boardsRepo.getAll();

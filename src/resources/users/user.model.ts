@@ -4,16 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  public id: string|null;
+  id: string|null;
 
   @Column()
-  public name: string;
+  name: string;
 
   @Column()
-  public login: string;
+  login: string;
 
   @Column()
-  public password?: string;
+  password?: string;
 
    constructor({
     id = uuidv4(),
