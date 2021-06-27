@@ -6,9 +6,10 @@ import 'reflect-metadata';
 import { usersRouter } from './resources/users/user.router';
 import { boardsRouter } from './resources/boards/board.router';
 import { tasksRouter } from './resources/tasks/task.router';
+import { loginRouter } from './resources/login/login.router';
 import { requestLogger } from './common/requestLogger'
 import { handleError } from './common/errorHandler';
-import { fatalErrorsHandle } from './common/fatalErrorHandlers'; // Test
+import { fatalErrorsHandle } from './common/fatalErrorHandlers';
 
 fatalErrorsHandle();
 
@@ -28,6 +29,8 @@ app.use('/', (req, res, next) => {
   }
   next();
 });
+
+app.use('/login', loginRouter);
 
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
