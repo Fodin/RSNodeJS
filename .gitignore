@@ -1,1 +1,7 @@
-node_modules
+/.idea
+/node_modules
+/doc
+/out
+/build
+/logs
+/data
