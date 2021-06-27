@@ -10,6 +10,7 @@ import { loginRouter } from './resources/login/login.router';
 import { requestLogger } from './common/requestLogger'
 import { handleError } from './common/errorHandler';
 import { fatalErrorsHandle } from './common/fatalErrorHandlers';
+import { validation } from './common/validation';
 
 fatalErrorsHandle();
 
@@ -31,7 +32,7 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/login', loginRouter);
-
+app.use(validation);
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 boardsRouter.use('/:boardId/tasks', tasksRouter);
