@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import bcrypt from 'bcrypt';
 import { User } from './user.model';
 import { usersService } from './user.service';
 import { ErrorHandler } from '../../common/errorHandler';
 
 const router = Router();
 
+// Get all users
 router.route('/').get(async (_req, res, next) => {
   try {
     const users = await usersService.getAll();
@@ -15,15 +17,18 @@ router.route('/').get(async (_req, res, next) => {
   }
 });
 
+// Create user
 router.route('/').post(async (req, res, next) => {
   try {
-    const user = await usersService.create(req.body);
+    const hash = bcrypt.hashSync(req.body.password, 8);
+    const user = await usersService.create({ ...req.body, password: hash});
     res.status(StatusCodes.CREATED).json(User.toResponse(user));
   } catch (err) {
     next(err);
   }
 });
 
+// Get user
 router.route('/:id').get(async (req, res, next) => {
   const user = await usersService.getById(req.params.id).catch((e) => next(e));
   if (user) {
@@ -33,6 +38,7 @@ router.route('/:id').get(async (req, res, next) => {
   }
 });
 
+// Update user
 router.route('/:id').put(async (req, res, next) => {
   const user = await usersService.update(req.params.id, req.body).catch((e) => next(e));
   if (user) {
@@ -42,6 +48,7 @@ router.route('/:id').put(async (req, res, next) => {
   }
 });
 
+// Delete user
 router.route('/:id').delete(async (req, res, next) => {
   const user = await usersService.remove(req.params.id).catch((e) => next(e));
   if (user) {
